@@ -13,7 +13,7 @@
                                         <a href="#"><i class="icon_bag_alt"></i></a>
                                     </li>
                                     <li class="quick-view">
-                                        <router-link to="/product">+ Quick Vieww</router-link> <!-- pengganti a href -->
+                                        <router-link to="/product">+ Quick View</router-link> <!-- pengganti a href -->
                                     </li>
                                 </ul>
                             </div>
@@ -25,69 +25,6 @@
                                 <div class="product-price">
                                     $14.00
                                     <span>$35.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img/products/women-2.jpg" alt="" />
-                                <ul>
-                                    <li class="w-icon active">
-                                        <a href="#"><i class="icon_bag_alt"></i></a>
-                                    </li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Shoes</div>
-                                <a href="#">
-                                    <h5>Guangzhou sweater</h5>
-                                </a>
-                                <div class="product-price">
-                                    $13.00
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img/products/women-3.jpg" alt="" />
-                                <ul>
-                                    <li class="w-icon active">
-                                        <a href="#"><i class="icon_bag_alt"></i></a>
-                                    </li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img/products/women-4.jpg" alt="" />
-                                <ul>
-                                    <li class="w-icon active">
-                                        <a href="#"><i class="icon_bag_alt"></i></a>
-                                    </li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon">
-                                        <a href="#"><i class="fa fa-random"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Converse Shoes</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
                                 </div>
                             </div>
                         </div>
