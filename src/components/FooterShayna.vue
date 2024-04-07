@@ -52,7 +52,7 @@
                         <div class="copyright-text">
                             Copyright &copy;
                             2023
-                            All rights reserved | Shayna
+                            All rights reserved | Hilm
                         </div>
                     </div>
                 </div>
