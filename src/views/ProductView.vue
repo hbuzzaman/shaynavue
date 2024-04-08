@@ -53,20 +53,14 @@
                         <div class="col-lg-6">
                             <div class="product-details text-left">
                                 <div class="pd-title">
-                                    <span>oranges</span>
-                                    <h3>Pure Pineapple</h3>
+                                    <span>{{productDetails.type}}</span>
+                                    <h3>{{productDetails.name}}</h3>
                                 </div>
                                 <div class="pd-desc">
                                     <p>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, error officia. Rem aperiam laborum voluptatum vel, pariatur modi hic provident eum iure natus quos non a sequi, id accusantium! Autem.
+                                        {{productDetails.description}}
                                     </p>
-                                    <p>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam possimus quisquam animi, commodi, nihil voluptate nostrum neque architecto illo officiis doloremque et corrupti cupiditate voluptatibus error illum. Commodi expedita animi nulla aspernatur.
-                                        Id asperiores blanditiis, omnis repudiandae iste inventore cum, quam sint molestiae accusamus voluptates ex tempora illum sit perspiciatis. Nostrum dolor tenetur amet, illo natus magni veniam quia sit nihil dolores.
-                                        Commodi ratione distinctio harum voluptatum velit facilis voluptas animi non laudantium, id dolorem atque perferendis enim ducimus? A exercitationem recusandae aliquam quod. Itaque inventore obcaecati, unde quam
-                                        impedit praesentium veritatis quis beatae ea atque perferendis voluptates velit architecto?
-                                    </p>
-                                    <h4>$495.00</h4>
+                                    <h4>Rp {{productDetails.price}}</h4>
                                 </div>
                                 <div class="quantity">
                                     <router-link to="/cart" class="primary-btn pd-cart">Add To Cart</router-link>
@@ -87,10 +81,11 @@
 
 <script>
 // @ is an alias to /src
-import HeaderShayna from '@/components/HeaderShayna.vue'
-import RelatedShayna from '@/components/RelatedShayna.vue'
-import FooterShayna from '@/components/FooterShayna.vue'
-import carousel from 'vue-owl-carousel'
+import HeaderShayna from '@/components/HeaderShayna.vue';
+import RelatedShayna from '@/components/RelatedShayna.vue';
+import FooterShayna from '@/components/FooterShayna.vue';
+import carousel from 'vue-owl-carousel';
+import axios from 'axios';
 
 export default {
   name: 'ProductView',
@@ -108,14 +103,26 @@ export default {
         "img/mickey2.jpg",
         "img/mickey3.jpg",
         "img/mickey4.jpg"
-      ]
+      ],
+      productDetails: []
     }
+
   },
   methods: {
     changeImage(urlImage){
       this.gambar_default=urlImage;
     }
   
+  },
+  mounted(){
+        axios
+            .get("http://shayna-be.test/api/products", {
+                params:{
+                    id: this.$route.params.id
+                }
+            }) //link API dengan parameter ID pada router
+            .then(res=>(this.productDetails = res.data.data)) //res=result. menampilkan result data yang dimasukan pada array productDetails. "res.data" disini yang SUB keberapa pada API
+            .catch(err=>console.log(err));
   }
 };
 </script>

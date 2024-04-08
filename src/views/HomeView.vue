@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderShayna />
-    <hero-shayna />
+    <HeroShayna />
     <WomenShayna />
     <InstaShayna />
     <PartnerShayna />

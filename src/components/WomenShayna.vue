@@ -4,16 +4,20 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 mt-5" v-if="products.length > 0" >
+                    <!-- carousel -->
                     <carousel class="product-slider" :items="3" :nav="false" :autoplay="false" :dots="false">
+                        <!-- mengambil data products(yg ada di bawah) dengan nama itemProduct -->
+                        <!-- v-for untuk perulangan mengambil data, dan v bind untuk tiap2 datanya -->
+                        <!-- jgn lupa tambahkan props pada router -> index.js -->
                         <div class="product-item" v-for="itemProduct in products" v-bind:key="itemProduct.id">
                             <div class="pi-pic">
-                                <img src="img/mickey1.jpg" alt="" />
+                                <img v-bind:src="itemProduct.galleries[0].photo" alt="" />
                                 <ul>
                                     <li class="w-icon active">
                                         <a href="#"><i class="icon_bag_alt"></i></a>
                                     </li>
                                     <li class="quick-view">
-                                        <router-link to="/product">+ Quick View</router-link> <!-- pengganti a href -->
+                                        <router-link v-bind:to="'/product/'+itemProduct.id">+ Quick View</router-link> <!-- pengganti a href -->
                                     </li>
                                 </ul>
                             </div>
@@ -24,7 +28,7 @@
                                 </router-link>
                                 <div class="product-price">
                                     ${{ itemProduct.price}}
-                                    <span>$35.00</span>
+                                    <span>$35.00d</span>
                                 </div>
                             </div>
                         </div>
@@ -51,14 +55,37 @@ export default{
     },
     data(){
         return {
-            products: []
+            products: [], //array products untuk menampung data produk yang diambil pada API
+            keranjangUser: []
         };
     },
     mounted(){
         axios
             .get("http://shayna-be.test/api/products") //link API
-            .then(res=>(this.products = res.data.data.data)) //res=result. menampilkan res.data data disini yang keberapa pada API
+            .then(res=>(this.products = res.data.data.data)) //res=result. menampilkan result data yang dimasukan pada array products. data disini yang SUB keberapa pada API
             .catch(err=>console.log(err));
+
+        if (localStorage.getItem("keranjangUser")) {
+            try{
+                this.keranjangUser = JSON.parse(localStorage.getItem("keranjangUser"));
+            } catch (e) {
+                localStorage.removeItem("keranjangUser");
+            }
+        }
+    },
+    saveKeranjang(idProduct, nameProduct, priceProduct, photoProduct){
+        var productStored = {
+            id: idProduct,
+            name: nameProduct,
+            price: priceProduct,
+            photo: photoProduct
+        };
+
+        this.keranjangUser.push(productStored);
+        const parsed = JSON.stringify(this.keranjangUser);
+        localStorage.setItem("keranjangUser", parsed);
+
+        window.location.reload();
     }
 };
 </script>
@@ -67,5 +94,8 @@ export default{
 <style scoped>
 .product-item {
     margin-right: 25px;
+}
+.pi-pic img {
+    height: 450px;
 }
 </style>
