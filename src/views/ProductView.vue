@@ -30,22 +30,17 @@
                                 <!-- Binding gambar sesuai data yang ada pada API -->
                                 <img class="product-big-img" :src="gambar_default" alt="" />
                             </div>
-                            <div class="product-thumbs">
-                                <carousel class="product-thumbs-track ps-slider" :nav="false" :autoplay="true" :dots="false" :loop="true">
-                                    <div class="pt" @click="changeImage(thumbs[0])" :class="thumbs[0] == gambar_default? 'active': '' ">
-                                        <img src="img/mickey1.jpg" alt="" />
-                                    </div>
-
-                                    <div class="pt" @click="changeImage(thumbs[1])" :class="thumbs[1] == gambar_default? 'active': '' ">
-                                        <img src="img/mickey2.jpg" alt="" />
-                                    </div>
-
-                                    <div class="pt" @click="changeImage(thumbs[2])" :class="thumbs[2] == gambar_default? 'active': '' ">
-                                        <img src="img/mickey3.jpg" alt="" />
-                                    </div>
-
-                                    <div class="pt" @click="changeImage(thumbs[3])" :class="thumbs[3] == gambar_default? 'active': '' ">
-                                        <img src="img/mickey4.jpg" alt="" />
+                            <div class="product-thumbs" v-if="productDetails.galleries.length>0">
+                                <carousel class="product-thumbs-track ps-slider" :nav="false" :dots="false">
+                                    <!-- perulangan produk galleri dengan ID produk -->
+                                    <div 
+                                        v-for="ss in productDetails.galleries" 
+                                        :key="ss.id" 
+                                        class="pt" 
+                                        @click="changeImage(ss.photo)" 
+                                        :class="ss.photo == gambar_default ? 'active': '' "
+                                        >
+                                            <img :src="ss.photo" alt/>
                                     </div>
                                 </carousel>
                             </div>
@@ -111,6 +106,12 @@ export default {
   methods: {
     changeImage(urlImage){
       this.gambar_default=urlImage;
+    },
+    setDataPicture(data){
+        // mengganti OBJEK productDetails dengan parameter data yang diambil dari API
+        this.productDetails=data;
+        // menganti value gambar default
+        this.gambar_default=data.galleries[0].photo;
     }
   
   },
@@ -121,7 +122,7 @@ export default {
                     id: this.$route.params.id
                 }
             }) //link API dengan parameter ID pada router
-            .then(res=>(this.productDetails = res.data.data)) //res=result. menampilkan result data yang dimasukan pada array productDetails. "res.data" disini yang SUB keberapa pada API
+            .then(res=>(this.setDataPicture(res.data.data))) //res=result.
             .catch(err=>console.log(err));
   }
 };
